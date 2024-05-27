@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'rentify.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.getenv('DATABASE_PATH', BASE_DIR), 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': "verceldb",
+        "USER": "default",
+        "PASSWORD": "FUmXc7nGptB6",
+        "HOST":"ep-spring-surf-a44fpkw3-pooler.us-east-1.aws.neon.tech",
+        "PORT":"5432",
     }
 }
 
