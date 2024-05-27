@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="card-title text-center pb-3">Property details</h1>
+            <h2 class="card-text ">{{ property.title }}</h2>
+            <p class="card-text">{{ property.description }}</p>
+            <p class="card-text"><strong>Location:</strong> {{ property.place }}</p>
+            <p class="card-text"><strong>Bedrooms:</strong> {{ property.bedrooms }}</p>
+            <p class="card-text"><strong>Bathrooms:</strong> {{ property.bathrooms }}</p>
+            <p class="card-text"><strong>Hospitals Nearby:</strong> {{ property.hospitals_nearby }}</p>
+            <p class="card-text"><strong>Colleges Nearby:</strong> {{ property.colleges_nearby }}</p>
+            <p class="card-text"><strong>Price:</strong> {{ property.price }}</p>
+            
+            <hr>
+            
+            <h2 class="card-title text-center">Seller Profile</h2>
+            <p class="card-text"><strong>Username:</strong> {{ seller.username }}</p>
+            <p class="card-text"><strong>First Name:</strong> {{ seller.first_name }}</p>
+            <p class="card-text"><strong>Last Name:</strong> {{ seller.last_name }}</p>
+            <p class="card-text"><strong>Email:</strong> {{ seller.email }}</p>
+
+            <hr>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Confirm </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

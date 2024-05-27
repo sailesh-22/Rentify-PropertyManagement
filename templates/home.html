@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Available Properties</h1>
+    <form method="get" class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <select name="place" class="form-select">
+                <option value="">All Places</option>
+                {% for place in places %}
+                    <option value="{{ place }}" {% if request.GET.place == place %}selected{% endif %}>{{ place }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <select name="bedrooms" id="bedrooms" class="form-select">
+                <option value="">Any Bedrooms</option>
+                {% for i in range %}
+                    <option value="{{ i }}" {% if request.GET.bedrooms == i|stringformat:"d" %}selected{% endif %}>{{ i }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <select name="price_order" id="price_order" class="form-select">
+                <option value="">Price Order</option>
+                <option value="low" {% if request.GET.price_order == "low" %}selected{% endif %}>Low to High</option>
+                <option value="high" {% if request.GET.price_order == "high" %}selected{% endif %}>High to Low</option>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3 d-grid">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+
+    {% if properties %}
+    <div class="row">
+        {% for property in properties %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ property.title }}</h5>
+                    <p class="card-text">{{ property.description }}</p>
+                    <p class="card-text"><strong>Location:</strong> {{ property.place }}</p>
+                    <p class="card-text"><strong>Price:</strong> ${{ property.price }}</p>
+                    <div class="d-flex justify-content-between gap-1 align-items-center mt-3">
+                        <a href="{% url 'property_detail' property.pk %}" class="btn btn-outline-primary ">View Details</a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'property_like' property.pk %}" class="btn btn-outline-danger">Like {{ property.likes.count }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h2 class="text-center">No Properties Available</h2>
+    {% endif %}
+</div>
+{% endblock %}

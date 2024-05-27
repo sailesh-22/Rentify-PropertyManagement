@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Your Properties</h2>
+    <div class="row">
+    {% if properties%}
+        {% for property in properties %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ property.title }}</h5>
+                        <p class="card-text">{{ property.description }}</p>
+                        <p class="card-text"><strong>Location:</strong> {{ property.place }}</p>
+                        <p class="card-text"><strong>Price:</strong> {{ property.price }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'property_detail' property.pk %}" class="btn btn-primary">View Details</a>
+                            <div>
+                                <form method="post" action="{% url 'property_delete' property.pk %}" style="display: inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                                <a href="{% url 'property_edit' property.pk %}" class="btn btn-secondary ml-2">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+        <h5 class="text-center text-danger p-4">You don't have any properties yet.</h5>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <h2 class="mb-4">Create New Property</h2>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post" action="{% url 'property_create' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <button type="submit" class="btn btn-primary">Create Property</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

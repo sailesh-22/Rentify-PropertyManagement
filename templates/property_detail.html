@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="card-title text-center">{{ property.title }}</h1>
+            <hr>
+            <p class="card-text"><strong>Description:</strong> {{ property.description }}</p>
+            <p class="card-text"><strong>Location:</strong> {{ property.place }}</p>
+            <p class="card-text"><strong>Bedrooms:</strong> {{ property.bedrooms }}</p>
+            <p class="card-text"><strong>Bathrooms:</strong> {{ property.bathrooms }}</p>
+            <p class="card-text"><strong>Hospitals Nearby:</strong> {{ property.hospitals_nearby }}</p>
+            <p class="card-text"><strong>Colleges Nearby:</strong> {{ property.colleges_nearby }}</p>
+            <p class="card-text"><strong>Price:</strong> {{ property.price }}</p>
+            <p class="card-text"><strong>Likes:</strong> {{ property.likes.count }}</p>
+            {% if user.is_authenticated %}
+                <div class="d-flex justify-content-center mt-4">
+                    <a href="{% url 'property_interest' property.pk %}" class="btn btn-primary btn-lg">I'm Interested</a>
+                </div>
+            {% else %}
+                <p class="text-muted text-center mt-4">Login to express interest in this property.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

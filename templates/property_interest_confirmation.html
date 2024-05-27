@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-center pb-3">Property Interest Confirmation</h2>
+            <p class="card-text">Dear {{ buyer.username }},</p>
+            <p class="card-text">We're delighted to inform you that you've successfully expressed interest in the following property:</p>
+            <ul class="list-unstyled">
+                <li><strong>Property Title:</strong> {{ property.title }}</li>
+                <li><strong>Property Description:</strong> {{ property.description }}</li>
+                <li><strong>Location:</strong> {{ property.place }}</li>
+                <li><strong>Bedrooms:</strong> {{ property.bedrooms }}</li>
+                <li><strong>Bathrooms:</strong> {{ property.bathrooms }}</li>
+                <li><strong>Hospitals Nearby:</strong> {{ property.hospitals_nearby }}</li>
+                <li><strong>Colleges Nearby:</strong> {{ property.colleges_nearby }}</li>
+                <li><strong>Price:</strong> {{ property.price }}</li>
+            </ul>
+            <p class="card-text text-success text-center">The seller will be notified of your interest shortly. Thank you for your interest in this property!</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
